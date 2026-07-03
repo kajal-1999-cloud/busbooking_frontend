@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+
+.scroll {
+  overflow-y: scroll;
+}
+
+:root {
+  --grayFont: #8a8a86;
+  --mediumRed: #dc635b;
+}
+
+li {
+  list-style: none;
+}
+button {
+  border: none;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.ant-tooltip-inner {
+  color: black !important; /* Ensure the text color is black */
+}
+
+/* html {
+  scrollbar-width: none;
+} */

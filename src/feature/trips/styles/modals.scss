@@ -1,0 +1,117 @@
+.bdContainer {
+    position: absolute;
+    max-height: 35vh;
+    min-width: 350px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
+    width: 30%;
+    text-align: start;
+    margin: 10px 23px;
+    z-index: 1000;
+    zoom: 0.9;
+  }
+  .boardingList,
+  .DroppingList {
+    height: 21vh;
+    padding: 5px 15px;
+    overflow-y: auto;
+    scrollbar-color: var(--mediumRed) #fce3e3;
+    scrollbar-width: thin;
+
+
+    &::-webkit-scrollbar {
+      width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background: #dc635b;
+      border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+      background: #8a3b34;
+  }
+
+  }
+
+
+
+  .bdContainer h5{
+    font-size: 20px;
+    font-weight: 500;
+     padding: .4rem;
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgb(209, 207, 207);
+  border-right: 1px solid rgb(209, 207, 207);
+  }
+  .boardingList h6, .DroppingList h6{
+    font-size: 18px;
+    font-weight: 500;
+    color: #616161;
+    margin: 3px 0px;
+    margin-top: 8px;
+  }
+
+  .boardingList p, .DroppingList p{
+    font-size: 16px;
+    color: rgb(184, 184, 184);
+  }
+  
+  .left h5,
+  .right h5 {
+    margin: 10px;
+  }
+  .left, .right{
+    width: 50%;
+  }
+  
+  .aminitesModal {
+    gap: 10px;
+    background-color: #ffffff;
+    padding:  10px;
+  width: fit-content;
+  min-width: 260px;
+  max-width: 600px;
+    text-align: left;
+    margin: auto;
+    margin-left: 20%;
+    margin-top: 5px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
+  
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin: 2px 30px;
+    }
+   h6{
+    font-size: 1rem;
+    margin: .8rem;
+    color: #703b3b;
+    padding-bottom:.5rem;
+    border-bottom: 1px solid rgb(211, 210, 210);
+   }
+   p{
+    font-size: .9rem;
+    margin: 0;
+    display: flex;
+    line-height: 2px;
+    gap: 3px;
+    align-items: center;
+    text-align: center;
+    align-self: center;
+    color: #444492;
+  }
+  svg {
+    fill: #444444;
+    stroke: #444444;
+  }
+
+  }
+ 
