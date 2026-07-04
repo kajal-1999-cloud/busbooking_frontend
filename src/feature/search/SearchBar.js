@@ -13,7 +13,6 @@ import {
   updateSourceCityId,
   updateDestinationCityId,
 } from "./slice";
-import { useNavigate } from "react-router-dom";
 import { fetchCitiesList } from "./thunk";
 import { getTravelDateEpoch } from "../../utils/travelDate";
 dayjs.extend(customParseFormat);

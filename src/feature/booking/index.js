@@ -43,7 +43,7 @@ const BookingScreen = () => {
     if (!cookieData) {
       navigate("/");
     }
-  }, []);
+  }, [cookieData, navigate]);
 
   if (!cookieData) {
     return;

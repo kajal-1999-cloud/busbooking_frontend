@@ -1,5 +1,4 @@
 import "../styles/TripList.scss";
-import tagImg from "../assets/tagImg.jpg";
 
 import { formatDate, formatTime } from "./formatDatetime";
 import { TripDetails } from "./TripsDetails";
@@ -40,7 +39,6 @@ export default function TripsList({ restoreTripId }) {
 const SingleTrip = (props) => {
   const { trip, source, destination, restoreTripId } = props;
   const [showSeat, setShowSeat] = useState(trip.tripId === restoreTripId);
-  const styles = { textAlign: "left", margin: "17px", maxWidth: "66vw" };
   const tripRef = useRef(null);
 
   useEffect(() => {
