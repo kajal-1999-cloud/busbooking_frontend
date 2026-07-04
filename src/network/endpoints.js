@@ -1,5 +1,5 @@
-// const baseUrl = "http://localhost:8080";
-const baseUrl = "https://busbooking-backend-b71n.onrender.com";
+const baseUrl = "http://localhost:8080";
+// const baseUrl = "https://busbooking-backend-b71n.onrender.com";
 
 const Endpoints = {
   searchCities: `${baseUrl}/city/cities`,
@@ -9,8 +9,6 @@ const Endpoints = {
   myBookings: `${baseUrl}/booking/list`,
   login: `${baseUrl}/auth/login`,
   singUp: `${baseUrl}/register/signUp`,
-  getOtp: `${baseUrl}/otp/generate-otp`,
-  verifyOtp: `${baseUrl}/otp/verify-otp`,
 };
 
 export default Endpoints;

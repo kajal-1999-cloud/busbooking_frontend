@@ -1,8 +1,6 @@
 import { Radio } from "antd";
 import "./Sigmup.scss";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import cookie from "js-cookie";
 import Cookies from "js-cookie";
 import Endpoints from "./../../network/endpoints";
 import request from "../../network/request";
@@ -12,7 +10,6 @@ import { showError, showSuccess } from "../../utils/toast";
 const Signup = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const email = cookie.get("email") || "";
 
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -62,10 +59,6 @@ const Signup = () => {
     }
   };
 
-  useEffect(() => {
-    if (email.length === 0) navigate("/otp");
-  }, [email, navigate]);
-
   return (
     <div className="signup-form">
       <form onSubmit={handelSubmit}>
@@ -85,7 +78,6 @@ const Signup = () => {
             placeholder="Enter your email"
             name="email"
             id="email"
-            defaultValue={email}
             required
           />
           <label htmlFor="age">Age</label>

@@ -5,7 +5,6 @@ import "material-icons/iconfont/material-icons.css";
 import LoginPage from "./feature/auth/LoginPage";
 import Signup from "./feature/auth/Signup";
 import Header from "./components/Header/Header";
-const Otp = lazy(() => import("./feature/auth/Otp"));
 const Search = lazy(() => import("./feature/search/index"));
 const TripsScreen = lazy(() => import("./feature/trips/index"));
 const BookingScreen = lazy(() => import("./feature/booking/index"));
@@ -53,7 +52,6 @@ const App = () => {
           path="/signup"
           element={<LazyLoadingWrapper Component={Signup} />}
         />
-        <Route path="/otp" element={<LazyLoadingWrapper Component={Otp} />} />
       </Routes>
     </BrowserRouter>
   );

@@ -143,7 +143,7 @@ const LoginPage = ({ endpoint }) => {
         <button
           className="google-btn"
           onClick={() =>
-            navigate("/otp", { state: { from: location.state?.from } })
+            navigate("/Signup", { state: { from: location.state?.from } })
           }
         >
           Register Now
