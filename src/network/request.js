@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { getApiErrorMessage } from "../utils/apiMessage";
 
 const request = async (httpConfig) => {
   const token = Cookies.get("token");
@@ -18,12 +19,13 @@ const request = async (httpConfig) => {
     });
     return { success: true, data: response.data };
   } catch (error) {
-    const message =
-      error.response?.data?.message ||
-      error.response?.data?.error ||
-      error.message ||
-      "Something went wrong";
-    return { success: false, data: message };
+    return {
+      success: false,
+      data: getApiErrorMessage(
+        error.response?.data,
+        error.message || "Something went wrong"
+      ),
+    };
   }
 };
 

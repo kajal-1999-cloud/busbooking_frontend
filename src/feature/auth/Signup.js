@@ -1,24 +1,33 @@
 import { Radio } from "antd";
 import "./Sigmup.scss";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
 import Cookies from "js-cookie";
 import Endpoints from "./../../network/endpoints";
 import request from "../../network/request";
 import navigateAfterAuth from "../../utils/navigateAfterAuth";
 import { showError, showSuccess } from "../../utils/toast";
+import { getApiErrorMessage } from "../../utils/apiMessage";
 
 const Signup = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [gender, setGender] = useState("");
 
   const handelSubmit = async (e) => {
     e.preventDefault();
+
+    if (!gender) {
+      showError("Please select your gender");
+      return;
+    }
+
     const payLoad = {
-      fullName: e.target["fullName"].value,
-      gender: e.target["gender"].value,
-      dob: e.target["dob"].value,
-      email: e.target["email"].value,
-      contactNumber: e.target["contactNumber"].value,
+      fullName: e.target["fullName"].value.trim(),
+      gender,
+      dob: Number(e.target["dob"].value),
+      email: e.target["email"].value.trim(),
+      contactNumber: String(e.target["contactNumber"].value),
       password: e.target["password"].value,
     };
 
@@ -31,7 +40,9 @@ const Signup = () => {
 
       if (res.status !== 200) {
         const data = await res.json().catch(() => ({}));
-        showError(data?.message || "Registration failed. Please try again.");
+        showError(
+          getApiErrorMessage(data, "Registration failed. Please try again.")
+        );
         return;
       }
 
@@ -88,9 +99,9 @@ const Signup = () => {
             id="age"
             required
           />
-          <Radio.Group name="gender">
-            <Radio value={"M"}>Male</Radio>
-            <Radio value={"F"}>Female</Radio>
+          <Radio.Group value={gender} onChange={(e) => setGender(e.target.value)}>
+            <Radio value="M">Male</Radio>
+            <Radio value="F">Female</Radio>
           </Radio.Group>
           <label htmlFor="Contact-number">Phone</label>
           <input
