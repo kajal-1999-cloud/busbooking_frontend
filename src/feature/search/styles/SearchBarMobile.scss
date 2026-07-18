@@ -2,33 +2,64 @@
     position: relative;
     min-height: 100vh;
     background-color: #fff;
+    overflow: hidden;
+    padding-bottom: 2rem;
 
     .oranger-div{
         background-color: #DC635B;
-        width: 100vw;
-        height: 42vh;
-        min-height: 280px;
-        border-bottom-left-radius: 19rem;
-        border-bottom-right-radius: 19rem;
+        width: 150vw;
+        height: 150vw;
+        max-width: 600px;
+        max-height: 600px;
+        border-radius: 50%;
+        position: absolute;
+        top: -95vw;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        overflow: hidden;
+
+        @media (min-width: 400px) {
+            top: -380px;
+        }
+
+        &::before, &::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            pointer-events: none;
+        }
+
+        &::before {
+            width: 50%;
+            height: 50%;
+            right: 15%;
+            bottom: 5%;
+        }
+
+        &::after {
+            width: 70%;
+            height: 70%;
+            right: 5%;
+            bottom: -5%;
+        }
     }
 
     .search-form-mobile{
         display: flex;
         flex-direction: column;
         align-items: center;
-        position: absolute;
+        position: relative;
         background-color: white;
         padding: 0.5rem 0.2rem;
         border-radius: 1rem;
-        top: calc(42vh - 5.5rem);
-        bottom: auto;
-        left: 50%;
-        transform: translateX(-50%);
-        width: calc(100% - 1rem);
+        margin: 1.5rem auto 0 auto;
+        width: calc(100% - 1.5rem);
         max-width: 420px;
         row-gap: 1.5rem;
         padding-bottom: 1.5rem;
-        box-shadow: 0 2px 5px rgba(211, 211, 211, 0.5), 0 -2px 5px rgba(211, 211, 211, 0.5), 2px 0 5px rgba(211, 211, 211, 0.5), -2px 0 5px rgba(211, 211, 211, 0.5);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         z-index: 2;
 
         hr{
@@ -64,11 +95,47 @@
                 font-size: 25px;
             }
         }
+        .mobile-quick-date-buttons {
+            display: flex;
+            gap: 0.75rem;
+            width: calc(100% - 2.5rem);
+            max-width: 330px;
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+
+            .quick-date-btn {
+                flex: 1;
+                padding: 0.5rem 0.8rem;
+                border-radius: 0.5rem;
+                font-size: 0.85rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                background-color: #FAF9F6;
+                color: #5A5557;
+                border: 1px solid #EBE6E0;
+                font-family: "Roboto", sans-serif;
+
+                &:hover {
+                    background-color: #F5F3ED;
+                }
+
+                &.active {
+                    background-color: #FDF1F0;
+                    color: #DC635B;
+                    border-color: #F6D3D1;
+                    box-shadow: 0 2px 6px rgba(220, 99, 91, 0.12);
+                }
+            }
+        }
+
         .select-date{
             display: flex;
             flex-direction: column;
             row-gap: 1rem;
             margin-bottom: 1rem;
+            position: relative;
+            
             p{
                 width: 71vw;
                 max-width: 300px;
@@ -83,8 +150,11 @@
             }
             .calendar{
                 position: absolute;
-                top: 12.2rem;
-                left: 4rem;
+                top: 50%;
+                left: 1.5rem;
+                transform: translateY(-50%);
+                display: flex;
+                align-items: center;
             }
               
         }
@@ -124,4 +194,27 @@
     width: 100%;
     text-align: center;
     z-index: 1;
+}
+
+.mobile-date-drawer {
+    .ant-drawer-content {
+        border-top-left-radius: 1.5rem !important;
+        border-top-right-radius: 1.5rem !important;
+        overflow: hidden;
+    }
+    
+    .ant-drawer-body {
+        padding: 1rem 0.5rem !important;
+    }
+
+    .ant-picker-calendar {
+        background: transparent;
+    }
+    
+    .ant-picker-calendar-header {
+        padding: 0 0.5rem 0.5rem 0.5rem;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
 }

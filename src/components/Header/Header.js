@@ -28,11 +28,11 @@ import "./Header.scss";
 const Logo = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="170"
+    width="190"
     height="40"
-    viewBox="0 0 170 40"
+    viewBox="0 0 190 40"
     fill="none"
-    aria-label="RoadTrip"
+    aria-label="TransitFlow"
   >
     {/* Road Icon */}
     <g transform="translate(0 4)">
@@ -59,18 +59,18 @@ const Logo = () => (
       fontWeight="700"
       fill="#E3262E"
     >
-      Road
+      Transit
     </text>
 
     <text
-      x="95"
+      x="120"
       y="27"
       fontFamily="Poppins, Arial, sans-serif"
       fontSize="24"
       fontWeight="700"
       fill="#5A1919"
     >
-      Trip
+      Flow
     </text>
   </svg>
 );

@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import Header from "../../components/Header/Header";
 import SearchBar from "./SearchBar";
 import SearchBarMobile from "./SearchBarMobile";
+import TopDestinations from "./TopDestinations";
+import Footer from "../../components/Footer/Footer";
 import { addDate } from "./slice";
 import { getTravelDateEpoch } from "../../utils/travelDate";
 import { showError } from "../../utils/toast";
@@ -47,6 +49,8 @@ const CitySearch = () => {
       <div className="mobile-search-component">
         <SearchBarMobile handleNavigate={handleNavigate} />
       </div>
+      <TopDestinations handleNavigate={handleNavigate} />
+      <Footer />
     </div>
   );
 };

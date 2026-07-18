@@ -1,0 +1,204 @@
+.top-destinations-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 3rem auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    .section-title {
+        text-align: center;
+        font-size: 1.8rem;
+        color: #212121;
+        margin-bottom: 2rem;
+        font-weight: 700;
+        position: relative;
+        
+        &::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #DC635B;
+            margin: 0.5rem auto 0 auto;
+            border-radius: 2px;
+        }
+    }
+
+    .destinations-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+    }
+
+    .destination-card {
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        border: 1px solid transparent;
+
+        &.theme-light {
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.06);
+
+            .card-content {
+                .route-badge {
+                    background-color: rgba(220, 99, 91, 0.08);
+                    color: #DC635B;
+                }
+                .city-name {
+                    color: #212121;
+                }
+                .suggested-trip {
+                    color: #DC635B;
+                    opacity: 0.9;
+                }
+                .description {
+                    color: #555555;
+                }
+                .card-footer {
+                    border-top: 1px solid rgba(0, 0, 0, 0.06);
+                    .price-label {
+                        color: #777777;
+                    }
+                    .price-tag {
+                        color: #DC635B;
+                    }
+                }
+            }
+
+            &:hover {
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        &.theme-dark {
+            background-color: #1e1e24;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.08);
+
+              background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.06);
+            .card-content {
+                .route-badge {
+                    background-color: rgba(255, 126, 117, 0.12);
+                    color: #ff7e75;
+                }
+                .city-name {
+                    color: #ffffff;
+                }
+                .suggested-trip {
+                    color: #ff7e75;
+                    opacity: 0.95;
+                }
+                .description {
+                    color: #b0b0bc;
+                }
+                .card-footer {
+                    border-top: 1px solid rgba(255, 255, 255, 0.08);
+                    .price-label {
+                        color: #a0a0ab;
+                    }
+                    .price-tag {
+                        color: #ff7e75;
+                    }
+                }
+            }
+
+            &:hover {
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
+                border-color: rgba(255, 126, 117, 0.3);
+            }
+        }
+
+        &:hover {
+            transform: translateY(-5px);
+
+            .card-image {
+                transform: scale(1.05);
+            }
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16 / 9;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+
+            .card-header-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 0.75rem;
+            }
+
+            .route-badge {
+                font-size: 0.75rem;
+                font-weight: 700;
+                padding: 0.25rem 0.6rem;
+                border-radius: 20px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .city-name {
+                margin: 0;
+                font-size: 1.3rem;
+                font-weight: 700;
+            }
+
+            .suggested-trip {
+                margin: 0 0 0.5rem 0;
+                font-size: 0.95rem;
+                font-weight: 600;
+            }
+
+            .description {
+                margin: 0 0 1.25rem 0;
+                font-size: 0.85rem;
+                line-height: 1.4;
+                flex-grow: 1;
+            }
+
+            .card-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-top: 1rem;
+
+                .price-label {
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                }
+
+                .price-tag {
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}
+

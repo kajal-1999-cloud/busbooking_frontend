@@ -1,6 +1,6 @@
 import "./styles/SearchBarMobile.scss";
 import { SwapOutlined } from "@ant-design/icons";
-import { DatePicker, Drawer } from "antd";
+import { DatePicker, Drawer, Calendar } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useState, useEffect } from "react";
@@ -62,6 +62,22 @@ const SearchBarMobile = ({ handleNavigate }) => {
     }
   }, [dispatch, suggestions.search.date, today]);
 
+  const [calendarValue, setCalendarValue] = useState(dayjs());
+  const [prevDateOpen, setPrevDateOpen] = useState(false);
+
+  useEffect(() => {
+    if (showPopOver.date && !prevDateOpen) {
+      setCalendarValue(
+        suggestions.search.date
+          ? dayjs.unix(suggestions.search.date)
+          : today
+      );
+      setPrevDateOpen(true);
+    } else if (!showPopOver.date && prevDateOpen) {
+      setPrevDateOpen(false);
+    }
+  }, [showPopOver.date, prevDateOpen, suggestions.search.date, today]);
+
   const handleCitySwap = () => {
     const swappedSource = search.destination;
     const swappedDestination = search.source;
@@ -100,6 +116,24 @@ const SearchBarMobile = ({ handleNavigate }) => {
     dispatch(addDate(date.unix()));
     setShowPopOver({ ...showPopOver, date: false });
   };
+
+  const handleTodayClick = (e) => {
+    e.stopPropagation();
+    const todayVal = dayjs().startOf("day");
+    setToday(todayVal);
+    dispatch(addDate(todayVal.unix()));
+  };
+
+  const handleTomorrowClick = (e) => {
+    e.stopPropagation();
+    const tomorrowVal = dayjs().add(1, "day").startOf("day");
+    setToday(tomorrowVal);
+    dispatch(addDate(tomorrowVal.unix()));
+  };
+
+  const selectedDateVal = suggestions.search.date ? dayjs.unix(suggestions.search.date) : today;
+  const isTodaySelected = selectedDateVal.isSame(dayjs(), "day");
+  const isTomorrowSelected = selectedDateVal.isSame(dayjs().add(1, "day"), "day");
   function epochToDate(epochTime) {
     const date = new Date(epochTime * 1000);
     const day = String(date.getDate()).padStart(2, "0");
@@ -166,6 +200,23 @@ const SearchBarMobile = ({ handleNavigate }) => {
             </svg>
 
             <p>{suggestions.search.destinationCity || "Going To"}</p>
+          </div>
+
+          <div className="mobile-quick-date-buttons">
+            <button
+              type="button"
+              className={`quick-date-btn ${isTodaySelected ? 'active' : ''}`}
+              onClick={handleTodayClick}
+            >
+              Today
+            </button>
+            <button
+              type="button"
+              className={`quick-date-btn ${isTomorrowSelected ? 'active' : ''}`}
+              onClick={handleTomorrowClick}
+            >
+              Tomorrow
+            </button>
           </div>
 
           <div
@@ -281,30 +332,83 @@ const SearchBarMobile = ({ handleNavigate }) => {
 
       <Drawer
         title="Select Departure Date"
-        placement="left"
+        placement="bottom"
         closable={true}
         onClose={() => setShowPopOver({ ...showPopOver, date: false })}
         open={showPopOver.date}
-        width="100%"
-        style={{ textAlign: "left" }}
+        height="auto"
+        className="mobile-date-drawer"
       >
-        <DatePicker
-          defaultValue={
-            suggestions.search.date
-              ? dayjs.unix(suggestions.search.date)
-              : today
-          }
-          value={
-            suggestions.search.date
-              ? dayjs.unix(suggestions.search.date)
-              : today
-          }
-          disableDate={(current) => {
-            return current && current < todayDate.startOf("day");
+        <Calendar
+          fullscreen={false}
+          value={calendarValue}
+          disabledDate={(current) => {
+            return current && (current < todayDate.startOf("day") || current > maxDate.endOf("day"));
           }}
-          minDate={todayDate}
-          maxDate={maxDate}
-          onChange={onDateChange}
+          headerRender={({ value, onChange }) => {
+            const handlePrevMonth = () => {
+              const newValue = value.clone().subtract(1, "month");
+              if (newValue.endOf("month").isAfter(todayDate.startOf("day"))) {
+                onChange(newValue);
+              }
+            };
+
+            const handleNextMonth = () => {
+              const newValue = value.clone().add(1, "month");
+              if (newValue.startOf("month").isBefore(maxDate.endOf("day"))) {
+                onChange(newValue);
+              }
+            };
+
+            const prevDisabled = value.clone().subtract(1, "month").endOf("month").isBefore(todayDate.startOf("day"));
+            const nextDisabled = value.clone().add(1, "month").startOf("month").isAfter(maxDate.endOf("day"));
+
+            return (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 16px' }}>
+                <button
+                  type="button"
+                  onClick={handlePrevMonth}
+                  disabled={prevDisabled}
+                  style={{
+                    border: 'none',
+                    background: 'transparent',
+                    cursor: prevDisabled ? 'not-allowed' : 'pointer',
+                    fontSize: '18px',
+                    color: prevDisabled ? '#ccc' : '#dc635b',
+                    padding: '4px 12px'
+                  }}
+                >
+                  &lt;
+                </button>
+                <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#333', fontFamily: 'Roboto, sans-serif' }}>
+                  {value.format("MMMM YYYY")}
+                </div>
+                <button
+                  type="button"
+                  onClick={handleNextMonth}
+                  disabled={nextDisabled}
+                  style={{
+                    border: 'none',
+                    background: 'transparent',
+                    cursor: nextDisabled ? 'not-allowed' : 'pointer',
+                    fontSize: '18px',
+                    color: nextDisabled ? '#ccc' : '#dc635b',
+                    padding: '4px 12px'
+                  }}
+                >
+                  &gt;
+                </button>
+              </div>
+            );
+          }}
+          onSelect={(date, selectInfo) => {
+            if (!selectInfo || selectInfo.source === 'date') {
+              onDateChange(date);
+            } else {
+              setCalendarValue(date);
+              setToday(date);
+            }
+          }}
         />
       </Drawer>
     </div>
