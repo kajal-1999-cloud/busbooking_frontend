@@ -1,6 +1,6 @@
 import "./styles/SearchBarMobile.scss";
 import { SwapOutlined } from "@ant-design/icons";
-import { DatePicker, Drawer, Calendar } from "antd";
+import { Drawer, Calendar } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useState, useEffect } from "react";
